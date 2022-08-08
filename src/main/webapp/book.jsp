@@ -18,7 +18,7 @@
 
 <body>
 
-<%@include file="includes/navbar.jsp" %>
+<%@include file="includes/user-navbar.jsp" %>
 
 <!--SAYTNI MENYUDAN PASTKI QISMI KONTENTLAR-->
 <section class="container mt-4 ">
@@ -32,7 +32,7 @@
 
         <c:forEach items="${bookList}" var="book">
             <div class="card my-4 text-center shadow col-md-3" style="width: 18rem;">
-                <a href="/book-description?id=${book.getId()}"> <img src="files/${book.getImgUrl()}"class="card-img-top" alt="${book.getTitle()}"></a>
+                <a href="/book-description?id=${book.getId()}"> <img src="files/${book.getImgFileName()}"class="card-img-top" alt="${book.getTitle()}"></a>
                 <div class="card-body">
                     <h5 class="card-title">${book.getTitle()}</h5>
                     <c:forEach items="${book.getAuthors()}" var="author">

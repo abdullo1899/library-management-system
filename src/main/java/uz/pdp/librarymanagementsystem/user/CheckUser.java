@@ -22,7 +22,7 @@ public class CheckUser extends HttpServlet {
 
         User userByUsername = UserDao.getUserByUsername(username);
 
-        if(username.equals("admin") && password.equals("admin123")){
+        if(username.equals("admin") && password.equals("1")){
             resp.sendRedirect("admin.jsp");
             return;
         }

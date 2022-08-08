@@ -12,7 +12,6 @@ import uz.pdp.librarymanagementsystem.category.CategoryDao;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URLDecoder;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -53,7 +52,7 @@ public class AddBookServlet extends HttpServlet {
                 .isbn(isbn)
                 .authorsIds(authorsIds)
                 .categoryId(categoryId)
-                .imgUrl(uploadAndGetImageUrl(imagePart, req))
+                .imgFileName(uploadAndGetImageUrl(imagePart, req))
                 .build();
 
         boolean result = BookDao.addNewBook(book);
@@ -76,18 +75,17 @@ public class AddBookServlet extends HttpServlet {
     private String uploadAndGetImageUrl(Part imagePart, HttpServletRequest request) {
         try {
 
-            // TODO: 03/08/22 fix upload image path
-            String contextPath = getServletContext().getContextPath();
-            File uploadDir = new File(UPLOAD_DIRECTORY, URLDecoder.decode(contextPath, "UTF-8"));
+            File uploadDir = new File(UPLOAD_DIRECTORY);
             if (!uploadDir.exists())
                 uploadDir.mkdir();
             int index = imagePart.getSubmittedFileName().lastIndexOf('.');
             String extension = imagePart.getSubmittedFileName().substring(index + 1);
             System.out.println("File extension is " + extension);
 
-            String imgPath = uploadDir.getPath() + "/" + System.currentTimeMillis() + "." + extension;
+            String imgName = System.currentTimeMillis() + "." + extension;
+            String imgPath = uploadDir.getPath() + "/" + imgName;
             imagePart.write(imgPath);
-            return imgPath;
+            return imgName;
 
         } catch (IOException e) {
             throw new RuntimeException(e);

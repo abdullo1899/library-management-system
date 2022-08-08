@@ -22,7 +22,7 @@ public class AttachmentServlet extends HttpServlet {
 
         String pathInfo = req.getPathInfo();
         String[] pathParts = pathInfo.split("/");
-        String fileName = pathParts[6];
+        String fileName = pathParts[pathParts.length - 1];
 
         System.out.println(fileName);
 //        String fileName = pathParts[2];
