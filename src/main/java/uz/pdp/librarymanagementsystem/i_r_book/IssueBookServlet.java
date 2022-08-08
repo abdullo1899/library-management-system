@@ -26,8 +26,6 @@ public class IssueBookServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String[] bookIds = req.getParameterValues("bookIds");
-        String id = req.getParameter("id");
-        long id1 = Long.parseLong(id);
         Set<Long> bookIdsFromlongArr = getBookIdsFromStrArr(bookIds);
 
         I_R_book i_r_book = I_R_book.builder()

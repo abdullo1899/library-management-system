@@ -21,7 +21,7 @@
 
        <label for="bookIds">Title:</label>
        <select id="bookIds" name="bookIds" multiple>
-           <option disabled value="0">Select authors:</option>
+           <option disabled value="0">Select book:</option>
            <c:forEach items="${bookList}" var="book">
                <option value="${book.getId()}">${book.getTitle()}</option>
            </c:forEach>
