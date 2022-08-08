@@ -23,7 +23,6 @@ import static uz.pdp.librarymanagementsystem.utils.Util.UPLOAD_DIRECTORY;
 @MultipartConfig(maxFileSize = 10_000_000)
 public class AddBookServlet extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -60,7 +59,7 @@ public class AddBookServlet extends HttpServlet {
         boolean result = BookDao.addNewBook(book);
 
         if (result) {
-            resp.sendRedirect("/books?added=true");
+            resp.sendRedirect("/admin?added=true");
         }
 
 

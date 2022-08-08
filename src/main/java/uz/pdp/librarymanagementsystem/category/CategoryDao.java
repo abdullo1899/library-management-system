@@ -14,7 +14,6 @@ public class CategoryDao {
 
     public static List<Category> getAllCategories() {
 
-
         try (Connection connection = DbConnection.getConnection();) {
             List<Category> categoryList = new ArrayList<>();
 
@@ -40,4 +39,25 @@ public class CategoryDao {
         }
 
     }
+
+    public static boolean addCategory(Category category) {
+        try {
+
+            Connection connection = DbConnection.getConnection();
+
+            String insertBook = "insert into category (name) VALUES " +
+                    "(?)";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(insertBook);
+
+            preparedStatement.setString(1, category.getName());
+
+            preparedStatement.execute();
+
+            return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

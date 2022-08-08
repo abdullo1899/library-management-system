@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class Author {
     private Long id;
     private String fullName;
+    private String biography;
 
 }

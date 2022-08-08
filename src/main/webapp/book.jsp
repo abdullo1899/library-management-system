@@ -28,8 +28,6 @@
         <h1>${message}</h1>
     </c:if>
 
-    <a href="/add-book">+ add new book</a>
-
     <div class="row justify-content-around">
 
         <c:forEach items="${bookList}" var="book">

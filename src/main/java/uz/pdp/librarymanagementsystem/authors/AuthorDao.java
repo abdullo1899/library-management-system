@@ -25,10 +25,12 @@ public class AuthorDao {
             while (resultSet.next()) {
                 long id = resultSet.getLong("id");
                 String fullName = resultSet.getString("fullName");
+                String biography = resultSet.getString("biography");
 
                 Author author = Author.builder()
                         .id(id)
                         .fullName(fullName)
+                        .biography(biography)
                         .build();
 
                 authorList.add(author);
@@ -39,5 +41,24 @@ public class AuthorDao {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public static boolean addAuthor(Author author) {
+        try {
+
+            Connection connection = DbConnection.getConnection();
+
+            String insertBook = "insert into author (biography, fullname) VALUES (?,?)";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(insertBook);
+
+            preparedStatement.setString(1, author.getBiography());
+            preparedStatement.setString(2, author.getFullName());
+
+            preparedStatement.execute();
+            return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
