@@ -15,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class User implements Base {
    public static User currentUser = null;
-    private Integer id;
+    private Long id;
     private String username;
     private String password;
     private String fullname;
@@ -31,7 +31,7 @@ public class User implements Base {
 
     public void get(ResultSet resultSet) {
         try {
-            this.id = resultSet.getInt("id");
+            this.id = resultSet.getLong("id");
             this.username = resultSet.getString("username");
             this.password = resultSet.getString("password");
             this.fullname = resultSet.getString("fullname");

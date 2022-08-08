@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import uz.pdp.librarymanagementsystem.books.BookDao;
+import uz.pdp.librarymanagementsystem.user.User;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -25,13 +26,15 @@ public class IssueBookServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String[] bookIds = req.getParameterValues("bookIds");
-
+        String id = req.getParameter("id");
+        long id1 = Long.parseLong(id);
         Set<Long> bookIdsFromlongArr = getBookIdsFromStrArr(bookIds);
 
         I_R_book i_r_book = I_R_book.builder()
                 .books(bookIdsFromlongArr)
                 .date(Date.valueOf(LocalDate.now()))
                 .is_issued(true)
+                .student_id(User.currentUser.getId())
                 .build();
 
         boolean result = I_R_Dao.add(i_r_book);
@@ -41,7 +44,7 @@ public class IssueBookServlet extends HttpServlet {
         }
     }
 
-    private Set<Long> getBookIdsFromStrArr(String[] bookIds) {
+    protected static Set<Long> getBookIdsFromStrArr(String[] bookIds) {
         Set<Long> bookIdsLong = new HashSet<>();
         for (String bookId : bookIds) {
             bookIdsLong.add(Long.parseLong(bookId));

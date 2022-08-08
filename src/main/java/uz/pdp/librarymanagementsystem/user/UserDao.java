@@ -65,7 +65,7 @@ public class UserDao {
             ps.setString(1,user.getUsername());
             ps.setString(2,user.getPassword());
             ps.setString(3,user.getFullname());
-            ps.setInt(4,user.getId());
+            ps.setLong(4,user.getId());
             ps.execute();
 
         }catch(Exception ex){ex.printStackTrace(); return false;}
@@ -97,7 +97,7 @@ public class UserDao {
             ps.setString(1,username);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
-                user.setId(rs.getInt(1));
+                user.setId(rs.getLong(1));
                 user.setUsername(rs.getString(2));
                 user.setPassword(rs.getString(3));
                 user.setFullname(rs.getString(4));
