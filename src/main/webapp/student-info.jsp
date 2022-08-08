@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<%@include file="includes/navbar.jsp" %>
+<%@include file="includes/user-navbar.jsp" %>
 
 <div class="container d-flex justify-content-center align-items-center">
 

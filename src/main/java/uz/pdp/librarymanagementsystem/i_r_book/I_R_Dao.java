@@ -103,7 +103,7 @@ public class I_R_Dao {
             ps.setBoolean(1, false);
             ps.setLong(2, id);
 
-            for (String bookId : ReturnBookServlet.bookIds) {
+            for (String bookId : SaveServlet.bookIds) {
                 ps.setLong(3, Long.parseLong(bookId));
             }
 

@@ -11,7 +11,7 @@
 <br/>
 
 
-<form action="/add-book" method="post" enctype="multipart/form-data">
+<form action="/add-book" method="get" enctype="multipart/form-data">
 
     <label for="title">Title:</label>
 

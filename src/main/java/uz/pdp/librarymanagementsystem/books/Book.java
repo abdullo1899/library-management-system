@@ -26,14 +26,14 @@ public class Book {
     private Long categoryId; // for insert/update
     private String isbn;
     private Integer year;
-    private String imgUrl;
+    private String imgFileName;
 
     private Set<Long> usersIds;
     private Set<User> users;
 
 
     public Book(Long id, String title, String description, Set<Author> authors, Category category, String isbn,
-                Integer year, String imgUrl) {
+                Integer year, String imgFileName) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -41,6 +41,6 @@ public class Book {
         this.category = category;
         this.isbn = isbn;
         this.year = year;
-        this.imgUrl = imgUrl;
+        this.imgFileName = imgFileName;
     }
 }

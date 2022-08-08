@@ -26,7 +26,7 @@ public class CategorySearch extends HttpServlet {
 
         for (Book book : allBooks) {
             if(i == book.getCategory().getId()){
-                writer.println("<img src="+book.getImgUrl()+"class=\"card-img-top\" alt="+ book.getTitle() + "><br><br>"
+                writer.println("<img src="+book.getImgFileName()+"class=\"card-img-top\" alt="+ book.getTitle() + "><br><br>"
                         + book.getTitle() + "<br><br>");
             }
         }

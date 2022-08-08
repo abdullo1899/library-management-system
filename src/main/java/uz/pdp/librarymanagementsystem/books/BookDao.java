@@ -25,7 +25,7 @@ public class BookDao {
 
             String sql = "select b.id,\n" +
                     "       b.title,\n" +
-                    "       b.\"imgUrl\",\n" +
+                    "       b.img_file_name,\n" +
                     "       b.isbn,\n" +
                     "       b.description,\n" +
                     "       b.year,\n" +
@@ -61,7 +61,7 @@ public class BookDao {
                 String title = resultSet.getString("title");
                 Array array = resultSet.getArray("authors");
                 Object categoryObj = resultSet.getObject("category");
-                String imgUrl = resultSet.getString("imgUrl");
+                String imgFileName = resultSet.getString("img_file_name");
                 String isbn = resultSet.getString("isbn");
                 int year = resultSet.getInt("year");
                 String description = resultSet.getString("description");
@@ -77,7 +77,7 @@ public class BookDao {
                         .title(title)
                         .authors(list)
                         .category(category)
-                        .imgUrl(imgUrl)
+                        .imgFileName(imgFileName)
                         .isbn(isbn)
                         .year(year)
                         .description(description)
@@ -105,7 +105,7 @@ public class BookDao {
 
             String sql = "select b.id,\n" +
                     "       b.title,\n" +
-                    "       b.\"imgUrl\",\n" +
+                    "       b.img_file_name,\n" +
                     "       b.isbn,\n" +
                     "       b.description,\n" +
                     "       b.year,\n" +
@@ -120,13 +120,10 @@ public class BookDao {
                     "         join books_authors ba on b.id = ba.bookid\n" +
                     "         join author a on a.id = ba.authorid\n" +
                     "         join category c on c.id = b.category_id\n" +
-                    "group by b.id, c.id, c.name, b.title\n"
-                    ;
+                    "group by b.id, c.id, c.name, b.title\n";
 
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-
 
 
 //            3. GET RESULTSET
@@ -139,7 +136,7 @@ public class BookDao {
                 String title = resultSet.getString("title");
                 Array array = resultSet.getArray("authors");
                 Object categoryObj = resultSet.getObject("category");
-                String imgUrl = resultSet.getString("imgUrl");
+                String imgFileName = resultSet.getString("img_file_name");
                 String isbn = resultSet.getString("isbn");
                 int year = resultSet.getInt("year");
                 String description = resultSet.getString("description");
@@ -155,7 +152,7 @@ public class BookDao {
                         .title(title)
                         .authors(list)
                         .category(category)
-                        .imgUrl(imgUrl)
+                        .imgFileName(imgFileName)
                         .isbn(isbn)
                         .year(year)
                         .description(description)
@@ -178,13 +175,13 @@ public class BookDao {
 
             Connection connection = DbConnection.getConnection();
 
-            String insertBook = "insert into book (title, \"imgUrl\", year, isbn, description, category_id) VALUES " +
+            String insertBook = "insert into book (title, img_file_name, year, isbn, description, category_id) VALUES " +
                     "(?, ?, ?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(insertBook);
 
             preparedStatement.setString(1, book.getTitle());
-            preparedStatement.setString(2, book.getImgUrl());
+            preparedStatement.setString(2, book.getImgFileName());
             preparedStatement.setLong(3, book.getYear());
             preparedStatement.setString(4, book.getIsbn());
             preparedStatement.setString(5, book.getDescription());
@@ -203,13 +200,10 @@ public class BookDao {
             }
 
 
-
             return executeUpdate1 == 1 && executeUpdate2 == 1;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
 
 
     }
@@ -218,15 +212,15 @@ public class BookDao {
     public static Book getBookById(int id) {
         Book book = new Book();
 
-        try{
+        try {
             Connection connection = DbConnection.getConnection();
-            PreparedStatement ps=connection.prepareStatement("select * from book where id=?");
-            ps.setInt(1,id);
-            ResultSet rs=ps.executeQuery();
-            if(rs.next()){
+            PreparedStatement ps = connection.prepareStatement("select * from book where id=?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
                 book.setId(rs.getLong(1));
                 book.setTitle(rs.getString(2));
-                book.setImgUrl(rs.getString(3));
+                book.setImgFileName(rs.getString(3));
                 book.setYear(rs.getInt(4));
                 book.setIsbn(rs.getString(5));
                 book.setDescription(rs.getString(6));
@@ -234,7 +228,9 @@ public class BookDao {
 
             }
 
-        }catch(Exception ex){ex.printStackTrace();}
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
         return book;
     }

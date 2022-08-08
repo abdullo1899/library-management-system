@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import uz.pdp.librarymanagementsystem.books.BookDao;
 
 import java.io.IOException;
 
@@ -16,6 +17,7 @@ public class AdminServlet extends HttpServlet {
         if (added) {
             req.setAttribute("message", "Successfully added!!!");
         }
+        req.setAttribute("bookList", BookDao.getAllBooks());
         req.getRequestDispatcher("admin.jsp").forward(req, resp);
     }
 }

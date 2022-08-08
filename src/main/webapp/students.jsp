@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<%@include file="includes/navbar.jsp" %>
+<%@include file="includes/admin-navbar.jsp" %>
 
 
 <section>
