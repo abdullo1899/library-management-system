@@ -40,8 +40,8 @@
 
        <br><br>
 
-       <input type="radio" name="is_issued" value="true">Issue<br>
-       <input type="radio" name="is_issued" VALUE="false">Return<br><br>
+       <input type="radio" name="is_issued" value="issued">Issue<br>
+       <input type="radio" name="is_issued" value="returned">Return<br><br>
 
        <button class="btn btn-outline-dark btn-lg px-5" type="submit">Save</button>
 
