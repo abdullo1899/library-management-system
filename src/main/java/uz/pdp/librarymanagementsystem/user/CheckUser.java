@@ -5,9 +5,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Optional;
 
 @WebServlet("/checkUser")
 public class CheckUser extends HttpServlet {
@@ -16,20 +18,25 @@ public class CheckUser extends HttpServlet {
 
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
+
+
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-
-        User userByUsername = UserDao.getUserByUsername(username);
-
         if(username.equals("admin") && password.equals("1")){
+            HttpSession session = req.getSession(true);
+            session.setAttribute("isAuthenticated", true);
             resp.sendRedirect("/admin");
             return;
         }
 
-        if(UserDao.checkUser(username)){
-            User.currentUser = userByUsername;
-//            req.getRequestDispatcher("/books").forward(req, resp);
+        User userByUsername = UserDao.getUserByUsername(username);
+
+        User.currentUser = userByUsername;
+
+        if (validateUser(username, password)) {
+            HttpSession session = req.getSession(true);
+            session.setAttribute("isAuthenticated", true);
             resp.sendRedirect("/books");
         } else {
             writer.println("<h1>Unable to find Student</h1>");
@@ -37,6 +44,14 @@ public class CheckUser extends HttpServlet {
             resp.sendRedirect("login.jsp");
         }
 
+
+
+    }
+
+    private boolean validateUser(String username, String password) {
+        Optional<User> userFromDb = UserDao.getList().stream().filter(user ->
+                user.getUsername().equals(username) && user.getPassword().equals(password)).findFirst();
+        return userFromDb.isPresent();
     }
 
 }

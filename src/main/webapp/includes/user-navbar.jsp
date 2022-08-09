@@ -31,7 +31,7 @@
     </div>
 
     <div class="profile-image ">
-        <a href="/student-info?id=${user.getId()}"> <img class="rounded-circle " src="webapp/images/img.png" width="60px" height="60px" alt=""></a>>
+        <a href="/student-info?id=${user.getId()}"> <img class="rounded-circle " src="images/img.png" width="60px" height="60px" alt=""></a>>
     </div>
 </nav>
 </body>

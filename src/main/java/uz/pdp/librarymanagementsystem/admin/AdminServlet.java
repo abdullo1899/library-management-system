@@ -20,4 +20,13 @@ public class AdminServlet extends HttpServlet {
         req.setAttribute("bookList", BookDao.getAllBooks());
         req.getRequestDispatcher("admin.jsp").forward(req, resp);
     }
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Boolean added = Boolean.valueOf(req.getParameter("added"));
+        if (added) {
+            req.setAttribute("message", "Successfully added!!!");
+        }
+        req.setAttribute("bookList", BookDao.getAllBooks());
+        req.getRequestDispatcher("admin.jsp").forward(req, resp);
+    }
 }

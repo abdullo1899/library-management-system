@@ -18,6 +18,6 @@ public class User_Info extends HttpServlet {
         resp.setContentType("text/html");
 
         req.setAttribute("user", User.currentUser);
-        req.getRequestDispatcher("admin-navbar.jsp").forward(req, resp);
+        req.getRequestDispatcher("student-info.jsp").forward(req, resp);
     }
 }
