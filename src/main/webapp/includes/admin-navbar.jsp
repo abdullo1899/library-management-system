@@ -23,7 +23,7 @@
             <li class="mx-3"><a href="/admin">Books</a></li>
             <li class="mx-3"><a href="/save-issue-book">Issue/Return a book</a></li>
             <li class="mx-3"><a href="/students">Students</a></li>
-            <li class="mx-3"><a href="/reports">Reports</a></li>
+            <li class="mx-3"><a href="/admin-reports">Reports</a></li>
             <li class="mx-3"><a href="/login.jsp">Login</a></li>
         </ul>
     </div>

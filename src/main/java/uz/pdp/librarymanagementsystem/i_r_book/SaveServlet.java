@@ -25,7 +25,7 @@ public class SaveServlet extends HttpServlet {
         String id = req.getParameter("id");
         long l = Long.parseLong(id);
 
-        if(is_issued.equals("true")){
+        if(is_issued.equals("issued")){
             I_R_book i_r_book = I_R_book.builder()
                     .books(bookIdsFromlongArr)
                     .date(Date.valueOf(LocalDate.now()))
@@ -39,14 +39,14 @@ public class SaveServlet extends HttpServlet {
                 writer.println("Successfully added!!!");
                 req.getRequestDispatcher("/save-issue-book").include(req, resp);
             }
-        } else if (is_issued.equals("false")){
+        } else if (is_issued.equals("returned")){
 
             boolean result = false;
 
             result = I_R_Dao.updateR_Book(l);
 
             if (result) {
-                writer.println("Successfully added!!!");
+                writer.println("Successfully updated!!!");
                 req.getRequestDispatcher("save-issue-book.jsp").include(req, resp);
             }
         }

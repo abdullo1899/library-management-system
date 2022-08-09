@@ -16,5 +16,6 @@ public class UserViewServlet extends HttpServlet {
         List<User> list = UserDao.getList();
         req.setAttribute("list", list);
         req.getRequestDispatcher("students.jsp").forward(req, resp);
+
     }
 }
