@@ -57,6 +57,34 @@ public class UserDao {
     }
 
 
+    public static List<User> getList(int size, int page) {
+        List<User> userList = new ArrayList<>();
+        try (
+                Connection connection = DbConnection.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("select * from users " +
+                        "limit ? offset ? * (? - 1)");
+        ) {
+
+
+            preparedStatement.setInt(1, size);
+            preparedStatement.setInt(2, page);
+            preparedStatement.setInt(3, page);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                User user = new User();
+                user.get(resultSet);
+                userList.add(user);
+            }
+            return userList;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
     public static boolean update(User user) {
         try{
             Connection connection = DbConnection.getConnection();
@@ -74,12 +102,12 @@ public class UserDao {
     }
 
 
-    public static boolean delete(int id) {
+    public static boolean delete(long id) {
 
         try{
             Connection connection = DbConnection.getConnection();
             PreparedStatement ps=connection.prepareStatement("delete from users where id=?");
-            ps.setInt(1,id);
+            ps.setLong(1,id);
             ps.execute();
 
         }catch(Exception e){e.printStackTrace(); return false;}

@@ -205,6 +205,45 @@ public class BookDao {
             throw new RuntimeException(e);
         }
 
+    }
+
+        public static boolean updateBook(Book book) {
+
+            try {
+
+                Connection connection = DbConnection.getConnection();
+
+                String insertBook = "update book set title=?, img_file_name=?, year=?, isbn=?, description=?, category_id=? where id = ?";
+
+                PreparedStatement preparedStatement = connection.prepareStatement(insertBook);
+
+                preparedStatement.setString(1, book.getTitle());
+                preparedStatement.setString(2, book.getImgFileName());
+                preparedStatement.setLong(3, book.getYear());
+                preparedStatement.setString(4, book.getIsbn());
+                preparedStatement.setString(5, book.getDescription());
+                preparedStatement.setLong(6, book.getCategoryId());
+                preparedStatement.setLong(7, book.getId());
+
+
+                String insertBooksAuthors = "update books_authors set authorid = ? where bookid = ?";
+                PreparedStatement preparedStatement2 = connection.prepareStatement(insertBooksAuthors);
+
+
+                int executeUpdate2 = 0;
+                for (Long authorId : book.getAuthorsIds()) {
+                    preparedStatement2.setLong(1, authorId);
+                }
+
+                preparedStatement2.setLong(2, book.getId());
+                int executeUpdate1 = preparedStatement.executeUpdate();
+
+
+                return executeUpdate1 == 1 ;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
 
     }
 
@@ -234,6 +273,34 @@ public class BookDao {
 
         return book;
     }
+
+    public static boolean deleteBook(long id){
+
+        try ( Connection connection = DbConnection.getConnection();
+              PreparedStatement ps = connection.prepareStatement("delete from book where id=?"))
+        {
+            ps.setLong(1, id);
+
+            PreparedStatement preparedStatement = connection.prepareStatement("delete from books_authors where bookid = ?");
+            preparedStatement.setLong(1, id);
+
+            PreparedStatement preparedStatement2 = connection.prepareStatement("delete from issued_returned_books where book_id = ?");
+            preparedStatement2.setLong(1, id);
+            preparedStatement.execute();
+            preparedStatement2.execute();
+            ps.execute();
+
+            return true;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
+
 
 
 }

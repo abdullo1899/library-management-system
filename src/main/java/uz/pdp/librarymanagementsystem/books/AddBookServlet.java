@@ -64,7 +64,7 @@ public class AddBookServlet extends HttpServlet {
 
     }
 
-    private Set<Long> getAuthorIdsFromStrArr(String[] authorsIdsStr) {
+    protected static Set<Long> getAuthorIdsFromStrArr(String[] authorsIdsStr) {
         Set<Long> authorIds = new HashSet<>();
         for (String authorId : authorsIdsStr) {
             authorIds.add(Long.parseLong(authorId));
@@ -72,7 +72,7 @@ public class AddBookServlet extends HttpServlet {
         return authorIds;
     }
 
-    private String uploadAndGetImageUrl(Part imagePart, HttpServletRequest request) {
+    protected static String uploadAndGetImageUrl(Part imagePart, HttpServletRequest request) {
         try {
 
             File uploadDir = new File(UPLOAD_DIRECTORY);

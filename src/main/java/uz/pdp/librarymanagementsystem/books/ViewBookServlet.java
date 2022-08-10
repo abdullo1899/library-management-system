@@ -21,7 +21,7 @@ public class ViewBookServlet extends HttpServlet {
         if (pageStr != null) {
             page = Integer.parseInt(pageStr);
         }
-        int size = 10;
+        int size = 3;
 
         List<Book> bookList = BookDao.getAllBooks(size, page);
 

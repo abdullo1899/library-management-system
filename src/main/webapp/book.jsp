@@ -47,9 +47,10 @@
         </c:forEach>
 
     </div>
-
-
 </section>
+
+<h3><a href="/books?page=1">1</a></h3> <h3><a href="/books?page=2">2</a></h3><h3><a href="/books?page=3">3</a></h3>
+
 
 <!--SAYTNI PASTKI QISMI | SAYT HAQIDA YOKI KOMPANIYA HAQIDA MA'LUMOTLAR -->
 <footer>
