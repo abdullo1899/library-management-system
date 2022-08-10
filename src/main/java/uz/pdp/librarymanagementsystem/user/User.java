@@ -1,6 +1,7 @@
 package uz.pdp.librarymanagementsystem.user;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import uz.pdp.librarymanagementsystem.books.Book;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class User implements Base {
    public static User currentUser = null;
     private Long id;

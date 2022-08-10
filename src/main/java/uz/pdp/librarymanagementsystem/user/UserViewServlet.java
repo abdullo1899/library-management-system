@@ -13,7 +13,15 @@ import java.util.List;
 public class UserViewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> list = UserDao.getList();
+        String pageStr = req.getParameter("page");
+        int page = 1;
+        if (pageStr != null) {
+            page = Integer.parseInt(pageStr);
+        }
+        int size = 10;
+
+        List<User> list = UserDao.getList(size, page);
+
         req.setAttribute("list", list);
         req.getRequestDispatcher("students.jsp").forward(req, resp);
 

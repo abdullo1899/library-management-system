@@ -22,7 +22,7 @@
         <ul class="d-flex">
             <li class="mx-3"><a href="/books">Books</a></li>
             <li class="mx-3"><a href="/student-reports">Reports</a></li>
-            <li class="mx-3"><a href="/login.jsp">Login</a></li>
+            <li class="mx-3"><a href="/login">Login</a></li>
         </ul>
     </div>
     <div class="search">

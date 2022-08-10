@@ -20,12 +20,16 @@
 
 <section>
 <table class="table">
-    <tr><th>Full Name</th><th>Username</th>
+    <tr><th>Id</th><th>Full Name</th><th>Username</th><th>Edit/Delete</th>
 
     <c:forEach items="${list}" var="user">
-        <tr><td>${user.getFullname()}</td><td>${user.getUsername()}</td></tr>
+        <tr><td>${user.getId()}</td><td>${user.getFullname()}</td>
+    <td>${user.getUsername()}</td><td><a href="/edit-user?id=${user.getId()}">Edit|</a> <a href="/delete-user?id=${user.getId()}">Delete</a></td></tr>
     </c:forEach>
 </table>
+
+    <h3><a href="/students?page=1">1</a></h3> <h3><a href="/students?page=2">2</a></h3><h3><a href="/students?page=3">3</a></h3>
+
 </section>
 
 </body>

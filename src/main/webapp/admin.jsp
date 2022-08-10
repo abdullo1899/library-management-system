@@ -44,15 +44,19 @@
                         </a>
                     </c:forEach>
                     <a href="/category-search?id=${book.getCategory().getId()}"><p class="card-text">${book.getCategory().getName()}</p></a>
+                    <a href="/edit-book?id=${book.getId()}" class="btn btn-outline-dark btn-lg px-5">Edit</a>
+                    <a href="/delete-book?id=${book.getId()}" class="btn btn-outline-dark btn-lg px-5">Delete</a>
 
                 </div>
+
+
             </div>
         </c:forEach>
 
     </div>
 
-
 </section>
+    <h3><a href="/admin?page=1">1</a></h3> <h3><a href="/admin?page=2">2</a></h3><h3><a href="/admin?page=3">3</a></h3>
 
 
 
